@@ -1,8 +1,11 @@
 const {expect, test} = require("@jest/globals");
-const {breadthFirstTraverse, depthFirstInsert, createNode} = require("../src/df-insert-bf-traverse");
+// const {breadthFirstTraverse, depthFirstInsert, createNode} = require("../src/df-insert-bf-traverse");
+const {createNode} = require("../src/df-insert-bf-traverse");
+const {depthFirstInsertIterative} = require("../src/df-insert-iterative");
+const {breadthFirstTraverseRecursive} = require("../src/bf-traverse-recursive");
 
 const insertWithString = (str, root = createNode("8")) => {
-  str.split("").forEach((c) => depthFirstInsert(root, c));
+  str.split("").forEach((c) => depthFirstInsertIterative(root, c));
   return root;
 };
 
@@ -24,7 +27,7 @@ for (let i = 0; i < testCases.length; i++) {
 
   test(`Insert "${str}", Traverse should be: "${traversedExpected}"`, () => {
     let root = insertWithString(str, createNode("8"));
-    let traversed = breadthFirstTraverse(root).join("")
+    let traversed = breadthFirstTraverseRecursive(root).join("")
     expect(traversed).toEqual(traversedExpected);
   })
 }
